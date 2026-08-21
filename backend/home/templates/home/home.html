@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} | Portfolio</title>
+</head>
+<body>
+
+    {% if profile %}
+        <h1>{{ profile.greeting }}</h1>
+
+        <h2>{{ profile.name }}</h2>
+
+        <h3>{{ profile.professional_title }}</h3>
+
+        <p>{{ profile.introduction }}</p>
+    {% else %}
+        <h1>Portfolio</h1>
+        <p>No active profile is available.</p>
+    {% endif %}
+
+</body>
+</html>
