@@ -14,6 +14,7 @@ venv/
 *.log
 db.sqlite3
 staticfiles/
+local_data.json
 
 # Media
 media/
@@ -24,3 +25,6 @@ media/
 # OS
 .DS_Store
 Thumbs.db
+# Database migration fixtures
+local_data*.json
+portfolio_data.json
