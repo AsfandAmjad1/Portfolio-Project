@@ -191,3 +191,9 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv("EMAIL_USERNAME")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+    if origin.strip()
+]
