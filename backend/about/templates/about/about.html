@@ -1,0 +1,2414 @@
+{% extends "base.html" %}
+
+{% block title %}
+About Me | Asfand Amjad
+{% endblock %}
+
+{% block meta_description %}
+Learn more about Asfand Amjad, a Computer Science student passionate about AI, data analytics, software development, and building practical technology solutions.
+{% endblock %}
+
+{% block og_title %}
+About Me | Asfand Amjad
+{% endblock %}
+
+{% block og_description %}
+Learn more about Asfand Amjad, a Computer Science student passionate about AI, data analytics, software development, and building practical technology solutions.
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+/* =========================================================
+   ABOUT PAGE
+   Premium Portfolio UI
+   ========================================================= */
+
+
+/* =========================================================
+   PAGE VARIABLES
+   ========================================================= */
+
+.about-page {
+
+    --about-bg: #ffffff;
+    --about-card: #ffffff;
+    --about-soft: #f7faff;
+    --about-soft-blue: #f0f6ff;
+
+    --about-heading: #111827;
+    --about-text: #40516d;
+    --about-muted: #71809a;
+
+    --about-border: #dce5f0;
+    --about-border-light: #e9eef5;
+
+    --about-blue: #2563eb;
+    --about-blue-dark: #174fc5;
+
+    --about-shadow:
+        0 12px 35px rgba(25, 55, 95, 0.055);
+
+    --about-radius: 9px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    padding: 72px 0 100px;
+
+    background: var(--about-bg);
+
+    color: var(--about-text);
+
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATIVE ELEMENTS
+   ========================================================= */
+
+.about-page::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    top: -285px;
+    right: -170px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37, 99, 235, 0.10) 0%,
+            rgba(37, 99, 235, 0.045) 42%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+}
+
+
+.about-page::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 380px;
+    height: 380px;
+
+    left: -270px;
+    top: 520px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(37, 99, 235, 0.055) 0%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.about-page .container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(
+        1120px,
+        calc(100% - 48px)
+    );
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   PAGE HEADING
+   ========================================================= */
+
+.about-page-heading {
+
+    margin: 0 0 66px;
+
+}
+
+
+.about-page-heading h1 {
+
+    margin: 0;
+
+    color: var(--about-heading);
+
+    font-size: clamp(
+        46px,
+        5.5vw,
+        68px
+    );
+
+    line-height: 0.98;
+
+    font-weight: 750;
+
+    letter-spacing: -0.055em;
+
+}
+
+
+.about-page-heading h1 span {
+
+    color: var(--about-blue);
+
+}
+
+
+/* =========================================================
+   HEADING ACCENT
+   ========================================================= */
+
+   .about-heading-line {
+    width: 64px;
+    height: 3px;
+    background: var(--accent);
+    margin-top: 18px;
+    position: relative;
+    border-radius: 999px;
+}
+
+.about-heading-line::after {
+    content: "";
+    position: absolute;
+    right: -19px;
+    top: 50%;
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+/* =========================================================
+   INTRODUCTION SECTION
+   ========================================================= */
+
+.about-introduction {
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.12fr)
+        minmax(330px, 0.88fr);
+
+    gap: 65px;
+
+    align-items: center;
+
+    padding-bottom: 62px;
+
+    border-bottom: 1px solid var(--about-border);
+
+}
+
+
+/* =========================================================
+   INTRODUCTION LEFT
+   ========================================================= */
+
+.about-introduction-left {
+
+    min-width: 0;
+
+}
+
+
+
+
+
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+.about-section-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 9px;
+
+    margin-bottom: 22px;
+
+    color: var(--about-heading);
+
+    font-size: 18px;
+    line-height: 1.25;
+    font-weight: 750;
+
+    letter-spacing: -0.02em;
+}
+
+.about-section-label::before {
+    content: "";
+
+    width: 34px;
+    height: 3px;
+
+    order: 2;
+
+    background: var(--about-blue);
+}
+
+
+/* Small blue bullet/line */
+
+.about-section-label::before {
+
+    content: "";
+
+    width: 25px;
+    height: 2px;
+
+    flex-shrink: 0;
+
+    background: var(--about-blue);
+
+}
+
+
+/* =========================================================
+   INTRODUCTION TEXT
+   ========================================================= */
+
+.about-introduction-text {
+
+    max-width: 665px;
+
+    color: var(--about-text);
+
+    font-size: 15px;
+
+    line-height: 1.75;
+
+}
+
+
+.about-introduction-text p {
+
+    margin: 0 0 13px;
+
+}
+
+
+.about-introduction-text p:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+/* =========================================================
+   TAGLINE AREA
+   ========================================================= */
+
+.about-tagline {
+
+    position: relative;
+
+    min-height: 176px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 30px 34px 30px 38px;
+
+    border: 1px solid var(--about-border);
+
+    border-radius: var(--about-radius);
+
+    background:
+
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(37, 99, 235, 0.095),
+            transparent 42%
+        ),
+
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(37, 99, 235, 0.055),
+            transparent 46%
+        ),
+
+        var(--about-soft);
+
+    box-shadow: var(--about-shadow);
+
+    overflow: hidden;
+
+}
+
+
+/* Left blue line */
+
+.about-tagline::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 2px;
+    height: 100%;
+
+    background: var(--about-blue);
+
+}
+
+
+/* Glowing point */
+
+.about-tagline::after {
+
+    content: "";
+
+    position: absolute;
+
+    top: 21px;
+    right: 23px;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--about-blue);
+
+    box-shadow:
+        0 0 0 6px rgba(37, 99, 235, 0.07),
+        0 0 20px rgba(37, 99, 235, 0.22);
+
+}
+
+
+/* =========================================================
+   TAGLINE DECORATIVE SVG
+   ========================================================= */
+
+.tagline-decoration {
+
+    position: absolute;
+
+    right: -2px;
+    bottom: -8px;
+
+    width: 145px;
+    height: 145px;
+
+    opacity: 0.7;
+
+    pointer-events: none;
+
+}
+
+
+.tagline-decoration svg {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+
+/* =========================================================
+   TAGLINE TEXT
+   ========================================================= */
+
+.about-tagline h2 {
+
+    position: relative;
+
+    z-index: 3;
+
+    max-width: 310px;
+
+    margin: 0;
+
+    color: var(--about-heading);
+
+    font-size: clamp(
+        29px,
+        3.2vw,
+        42px
+    );
+
+    line-height: 1.06;
+
+    font-weight: 750;
+
+    letter-spacing: -0.045em;
+
+}
+
+
+/* =========================================================
+   COMMON SECTION
+   ========================================================= */
+
+.about-section-block {
+
+    padding: 52px 0;
+
+    border-bottom: 1px solid var(--about-border);
+
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+.about-section-heading {
+    margin-bottom: 22px;
+}
+
+
+.about-section-heading h2 {
+    margin: 0;
+
+    color: var(--about-heading);
+
+    font-size: 21px;
+
+    line-height: 1.2;
+
+    font-weight: 750;
+
+    letter-spacing: -0.025em;
+}
+
+
+/* Blue line UNDER heading */
+
+.section-heading-line {
+    display: block;
+
+    width: 34px;
+    height: 3px;
+
+    margin-top: 9px;
+
+    background: var(--about-blue);
+}
+
+
+
+.about-section-label {
+    font-size: 17px;
+    gap: 8px;
+}
+
+
+
+
+/* =========================================================
+   PERSONAL INFORMATION TABLE
+   ========================================================= */
+
+.personal-information-table {
+
+    width: 100%;
+
+    border: 1px solid var(--about-border);
+
+    border-radius: var(--about-radius);
+
+    background: var(--about-card);
+
+    overflow: hidden;
+
+    box-shadow: var(--about-shadow);
+
+}
+
+
+/* =========================================================
+   TABLE HEADER
+   ========================================================= */
+
+.personal-table-header {
+
+    display: grid;
+
+    grid-template-columns: 31% 69%;
+
+    padding: 11px 16px;
+
+    background: var(--about-soft);
+
+    border-bottom: 1px solid var(--about-border);
+
+}
+
+
+.personal-table-header span {
+
+    color: var(--about-muted);
+
+    font-size: 9px;
+
+    line-height: 1;
+
+    font-weight: 750;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =========================================================
+   TABLE ROW
+   ========================================================= */
+
+.personal-table-row {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 31% 69%;
+
+    min-height: 52px;
+
+    border-bottom: 1px solid var(--about-border-light);
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease;
+}
+
+.personal-table-row:last-child {
+    border-bottom: none;
+}
+
+
+/* Hover + keyboard focus */
+
+.personal-table-row:hover,
+.personal-table-row:focus {
+    outline: none;
+
+    background: var(--about-blue-soft);
+
+    box-shadow:
+        inset 3px 0 0 var(--about-blue);
+}
+
+
+/* Label */
+
+.personal-label {
+    display: flex;
+
+    align-items: center;
+
+    padding: 11px 16px;
+
+    color: var(--about-muted);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease;
+}
+
+
+/* Value */
+
+.personal-value {
+    display: flex;
+
+    align-items: center;
+
+    padding: 11px 16px;
+
+    color: var(--about-heading);
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    border-left: 1px solid var(--about-border-light);
+
+    transition:
+        color 0.2s ease;
+}
+
+
+/* Text changes on hover */
+
+.personal-table-row:hover .personal-label,
+.personal-table-row:focus .personal-label {
+    color: var(--about-blue);
+}
+
+.personal-table-row:hover .personal-value,
+.personal-table-row:focus .personal-value {
+    color: var(--about-blue);
+}
+
+
+/* Icon */
+
+.personal-icon {
+    width: 30px;
+    height: 30px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 11px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--about-soft-blue);
+
+    color: var(--about-blue);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.personal-icon svg {
+    width: 15px;
+    height: 15px;
+
+    stroke: currentColor;
+
+    fill: none;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* Icon reacts with row */
+
+.personal-table-row:hover .personal-icon,
+.personal-table-row:focus .personal-icon {
+    background: var(--about-blue);
+
+    color: #ffffff;
+
+    transform: scale(1.05);
+}
+
+.personal-table-row:last-child {
+
+    border-bottom: none;
+
+}
+
+
+
+
+
+
+
+
+.personal-icon svg {
+
+    width: 14px;
+    height: 14px;
+
+    stroke: currentColor;
+
+    fill: none;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+}
+
+
+/* =========================================================
+   PERSONAL LABEL
+   ========================================================= */
+
+.personal-label {
+
+    color: var(--about-muted);
+
+    font-size: 12px;
+
+    font-weight: 550;
+
+}
+
+
+/* =========================================================
+   PERSONAL VALUE
+   ========================================================= */
+
+.personal-value {
+
+    color: var(--about-heading);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    border-left: 1px solid var(--about-border-light);
+
+}
+
+
+/* =========================================================
+   CAREER OBJECTIVE
+   ========================================================= */
+
+.career-objective-box {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 22px;
+
+    min-height: 100px;
+
+    padding: 20px 28px;
+
+    border: 1px solid var(--about-border);
+
+    border-left: 3px solid var(--about-blue);
+
+    border-radius: var(--about-radius);
+
+    background:
+
+        linear-gradient(
+            105deg,
+            var(--about-soft),
+            var(--about-card)
+        );
+
+    overflow: hidden;
+
+}
+
+
+/* Decorative background circle */
+
+.career-objective-box::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -95px;
+    bottom: -120px;
+
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.055);
+
+}
+
+
+/* =========================================================
+   OBJECTIVE ICON
+   ========================================================= */
+
+.objective-icon {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffffff 0%,
+            #edf4ff 70%
+        );
+
+    color: var(--about-blue);
+
+}
+
+
+.objective-icon svg {
+
+    width: 32px;
+    height: 32px;
+
+    stroke: currentColor;
+
+    fill: none;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =========================================================
+   OBJECTIVE DIVIDER
+   ========================================================= */
+
+.objective-divider {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 1px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    background: rgba(
+        37,
+        99,
+        235,
+        0.25
+    );
+
+}
+
+
+/* =========================================================
+   OBJECTIVE TEXT
+   ========================================================= */
+
+.career-objective-box p {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 900px;
+
+    margin: 0;
+
+    color: var(--about-text);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    font-weight: 550;
+
+}
+
+
+/* =========================================================
+   CAREER INTERESTS
+   ========================================================= */
+
+.career-interests {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+}
+
+
+/* =========================================================
+   INTEREST CARD
+   ========================================================= */
+
+.career-interest {
+
+    position: relative;
+
+    min-height: 116px;
+
+    padding: 18px;
+
+    border: 1px solid var(--about-border);
+
+    border-radius: var(--about-radius);
+
+    background: var(--about-card);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.career-interest:hover {
+
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(37, 99, 235, 0.30);
+
+    background:
+        var(--about-soft-blue);
+
+    box-shadow:
+        0 12px 30px rgba(
+            30,
+            70,
+            120,
+            0.07
+        );
+
+}
+
+
+/* =========================================================
+   INTEREST NUMBER
+   ========================================================= */
+
+.interest-number {
+
+    position: absolute;
+
+    top: 15px;
+    left: 18px;
+
+    color: var(--about-blue);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    letter-spacing: 0.12em;
+
+}
+
+
+/* =========================================================
+   INTEREST TOP LINE
+   ========================================================= */
+
+.interest-top-line {
+
+    position: absolute;
+
+    top: 19px;
+    left: 45px;
+
+    width: 21px;
+    height: 2px;
+
+    background: var(--about-blue);
+
+}
+
+
+/* =========================================================
+   INTEREST ICON
+   ========================================================= */
+
+.interest-icon {
+
+    position: absolute;
+
+    left: 18px;
+    bottom: 18px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        var(--about-soft-blue);
+
+    color: var(--about-blue);
+
+}
+
+
+.interest-icon svg {
+
+    width: 22px;
+    height: 22px;
+
+    stroke: currentColor;
+
+    fill: none;
+
+    stroke-width: 1.7;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+
+}
+
+
+/* =========================================================
+   INTEREST TITLE
+   ========================================================= */
+
+.career-interest h3 {
+
+    position: absolute;
+
+    left: 75px;
+
+    right: 14px;
+
+    bottom: 28px;
+
+    margin: 0;
+
+    color: var(--about-heading);
+
+    font-size: 13px;
+
+    line-height: 1.35;
+
+    font-weight: 700;
+
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+[data-theme="dark"] .about-page {
+
+    --about-bg: #07101d;
+
+    --about-card: #0b1727;
+
+    --about-soft: #0d1b2d;
+
+    --about-soft-blue:
+        rgba(47, 123, 255, 0.09);
+
+    --about-heading: #f5f8ff;
+
+    --about-text: #c7d3e4;
+
+    --about-muted: #8fa1b9;
+
+    --about-border:
+        rgba(91, 128, 172, 0.25);
+
+    --about-border-light:
+        rgba(91, 128, 172, 0.16);
+
+    --about-blue: #2f7bff;
+
+    --about-blue-dark: #5795ff;
+
+    --about-shadow:
+        0 14px 38px rgba(
+            0,
+            0,
+            0,
+            0.18
+        );
+
+}
+
+
+/* =========================================================
+   DARK TAGLINE
+   ========================================================= */
+
+[data-theme="dark"] .about-tagline {
+
+    background:
+
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(47, 123, 255, 0.14),
+            transparent 43%
+        ),
+
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(47, 123, 255, 0.08),
+            transparent 47%
+        ),
+
+        var(--about-soft);
+
+}
+
+
+/* =========================================================
+   DARK OBJECTIVE
+   ========================================================= */
+
+[data-theme="dark"] .career-objective-box {
+
+    background:
+
+        linear-gradient(
+            105deg,
+            var(--about-soft),
+            var(--about-card)
+        );
+
+}
+
+
+[data-theme="dark"] .objective-icon {
+
+    background:
+        rgba(47, 123, 255, 0.10);
+
+}
+
+
+/* =========================================================
+   DARK TABLE
+   ========================================================= */
+
+[data-theme="dark"] .personal-table-header {
+
+    background: var(--about-soft);
+
+}
+
+
+[data-theme="dark"] .personal-table-row:hover {
+
+    background:
+        rgba(47, 123, 255, 0.065);
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+
+    .about-page {
+
+        padding: 62px 0 85px;
+
+    }
+
+
+    .about-introduction {
+
+        grid-template-columns: 1fr;
+
+        gap: 38px;
+
+    }
+
+
+    .about-introduction-text {
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+
+    .about-tagline {
+
+        max-width: 520px;
+
+    }
+
+
+    .career-interests {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+
+    .about-page {
+
+        padding: 48px 0 70px;
+
+    }
+
+
+    .about-page .container {
+
+        width: calc(100% - 30px);
+
+    }
+
+
+    /* -----------------------------------------
+       PAGE HEADING
+       ----------------------------------------- */
+
+    .about-page-heading {
+
+        margin-bottom: 48px;
+
+    }
+
+
+    .about-page-heading h1 {
+
+        font-size: 43px;
+
+    }
+
+
+    .about-heading-line {
+
+        width: 58px;
+
+        margin-top: 15px;
+
+    }
+
+
+    /* -----------------------------------------
+       INTRODUCTION
+       ----------------------------------------- */
+
+    .about-introduction {
+
+        gap: 30px;
+
+        padding-bottom: 50px;
+
+    }
+
+
+    .about-section-label {
+
+        margin-bottom: 15px;
+
+        font-size: 14px;
+
+    }
+
+
+    .about-introduction-text {
+    max-width: 680px;
+
+    color: var(--about-text);
+
+    font-size: 18px;
+    line-height: 1.8;
+
+    letter-spacing: -0.005em;
+}
+
+.about-introduction-text p {
+    margin: 0 0 16px;
+}
+
+.about-introduction-text p:last-child {
+    margin-bottom: 0;
+}
+
+
+    /* -----------------------------------------
+       TAGLINE
+       ----------------------------------------- */
+
+    .about-tagline {
+
+        min-height: 145px;
+
+        padding: 25px 25px 25px 29px;
+
+    }
+
+
+    .about-tagline h2 {
+
+        max-width: 270px;
+
+        font-size: 29px;
+
+    }
+
+
+    /* -----------------------------------------
+       COMMON SECTIONS
+       ----------------------------------------- */
+
+    .about-section-block {
+
+        padding: 46px 0;
+
+    }
+
+
+    .about-section-heading {
+
+        margin-bottom: 17px;
+
+    }
+
+
+    .about-section-heading h2 {
+
+        font-size: 16px;
+
+    }
+
+
+    /* -----------------------------------------
+       PERSONAL INFORMATION
+       ----------------------------------------- */
+
+    .personal-table-header {
+
+        display: none;
+
+    }
+
+
+    .personal-table-row {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+
+        padding: 12px 14px;
+
+    }
+
+
+    .personal-label,
+    .personal-value {
+
+        padding: 0;
+
+        border-left: none;
+
+    }
+
+
+    .personal-label {
+
+        margin-bottom: 5px;
+
+        font-size: 9px;
+
+        font-weight: 700;
+
+        letter-spacing: 0.1em;
+
+        text-transform: uppercase;
+
+    }
+
+
+    .personal-value {
+
+        padding-left: 38px;
+
+        font-size: 12px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .personal-icon {
+
+        width: 25px;
+        height: 25px;
+
+        margin-right: 8px;
+
+    }
+
+
+    .personal-icon svg {
+
+        width: 12px;
+        height: 12px;
+
+    }
+
+
+    /* -----------------------------------------
+       CAREER OBJECTIVE
+       ----------------------------------------- */
+
+    .career-objective-box {
+
+        align-items: flex-start;
+
+        gap: 14px;
+
+        padding: 20px;
+
+    }
+
+
+    .objective-icon {
+
+        width: 45px;
+        height: 45px;
+
+    }
+
+
+    .objective-icon svg {
+
+        width: 27px;
+        height: 27px;
+
+    }
+
+
+    .objective-divider {
+
+        height: 42px;
+
+    }
+
+
+    .career-objective-box p {
+
+        font-size: 12px;
+
+        line-height: 1.7;
+
+    }
+
+
+    /* -----------------------------------------
+       CAREER INTERESTS
+       ----------------------------------------- */
+
+    .career-interests {
+
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+
+    }
+
+
+    .career-interest {
+
+        min-height: 88px;
+
+    }
+
+
+    .interest-icon {
+
+        left: 17px;
+
+        bottom: 16px;
+
+        width: 38px;
+        height: 38px;
+
+    }
+
+
+    .interest-icon svg {
+
+        width: 20px;
+        height: 20px;
+
+    }
+
+
+    .career-interest h3 {
+
+        left: 67px;
+
+        bottom: 26px;
+
+        font-size: 13px;
+
+    }
+
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+
+    .about-page .container {
+
+        width: calc(100% - 24px);
+
+    }
+
+
+    .about-page-heading h1 {
+
+        font-size: 39px;
+
+    }
+
+
+    .about-tagline h2 {
+
+        font-size: 27px;
+
+    }
+
+
+    .career-objective-box {
+
+        padding: 17px;
+
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     ABOUT PAGE
+========================================================= -->
+
+<section class="about-page">
+
+
+    <div class="container">
+
+
+        <!-- =================================================
+             PAGE HEADING
+        ================================================== -->
+
+        <header class="about-page-heading">
+
+
+            <h1>
+                About <span>Me</span>
+            </h1>
+
+
+            <div class="about-heading-line"></div>
+
+
+        </header>
+
+
+        <!-- =================================================
+             MY INTRODUCTION
+        ================================================== -->
+
+        {% if profile %}
+
+        <section class="about-introduction">
+
+
+            <!-- LEFT CONTENT -->
+
+            <div class="about-introduction-left">
+
+
+                <div class="about-section-label">
+
+                    {{ profile.introduction_heading|default:"My Introduction" }}
+
+                </div>
+
+
+                <div class="about-introduction-text">
+
+                    {{ profile.introduction|linebreaks }}
+
+                </div>
+
+
+            </div>
+
+
+            <!-- RIGHT TAGLINE -->
+
+            <div class="about-tagline">
+
+
+                <!-- Decorative SVG -->
+
+                <div class="tagline-decoration">
+
+                    <svg
+                        viewBox="0 0 150 150"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="150"
+                            cy="150"
+                            r="92"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            opacity="0.10"
+                        />
+
+                        <circle
+                            cx="150"
+                            cy="150"
+                            r="66"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            opacity="0.08"
+                        />
+
+                        <path
+                            d="M45 105
+                               C65 70, 98 54, 150 40"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1"
+                            opacity="0.08"
+                        />
+
+                    </svg>
+
+                </div>
+
+
+                <h2>
+
+                    {{ profile.tagline|default:"Turning Complexity into Clarity." }}
+
+                </h2>
+
+
+            </div>
+
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             PERSONAL INFORMATION
+        ================================================== -->
+
+        {% if personal_information %}
+
+        <section class="about-section-block">
+
+
+            <!-- SECTION HEADING -->
+
+            <div class="about-section-heading">
+
+    <h2>
+        Personal Information
+    </h2>
+
+    <span class="section-heading-line"></span>
+
+</div>
+
+
+            <!-- TABLE -->
+
+            <div class="personal-information-table">
+
+
+                <!-- TABLE HEADER -->
+
+                <div class="personal-table-header">
+
+                    <span>
+                        Information
+                    </span>
+
+                    <span>
+                        Details
+                    </span>
+
+                </div>
+
+
+                <!-- TABLE ROWS -->
+
+                {% for item in personal_information %}
+
+                <div class="personal-table-row "tabindex="0">
+
+
+                    <!-- LABEL -->
+
+                    <div class="personal-label">
+
+
+                        <span class="personal-icon">
+
+
+                            {% if "name" in item.label|lower %}
+
+                            <!-- USER SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="8"
+                                    r="3.2"
+                                />
+
+                                <path
+                                    d="M5 20
+                                       C5.7 15.8,
+                                       8.1 13.5,
+                                       12 13.5
+                                       C15.9 13.5,
+                                       18.3 15.8,
+                                       19 20"
+                                />
+
+                            </svg>
+
+
+                            {% elif "education" in item.label|lower %}
+
+                            <!-- EDUCATION SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M3 9
+                                       L12 4
+                                       L21 9
+                                       L12 14
+                                       Z"
+                                />
+
+                                <path
+                                    d="M7 12
+                                       V17
+                                       C9.8 19,
+                                       14.2 19,
+                                       17 17
+                                       V12"
+                                />
+
+                                <path
+                                    d="M21 9
+                                       V15"
+                                />
+
+                            </svg>
+
+
+                            {% elif "status" in item.label|lower %}
+
+                            <!-- STATUS SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="5"
+                                    y="4"
+                                    width="14"
+                                    height="16"
+                                    rx="2"
+                                />
+
+                                <path d="M9 8H15" />
+
+                                <path d="M9 12H15" />
+
+                                <path d="M9 16H13" />
+
+                            </svg>
+
+
+                            {% elif "language" in item.label|lower %}
+
+                            <!-- LANGUAGE SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                />
+
+                                <path
+                                    d="M3.8 9H20.2"
+                                />
+
+                                <path
+                                    d="M3.8 15H20.2"
+                                />
+
+                                <path
+                                    d="M12 3.5
+                                       C9.7 6,
+                                       8.5 9,
+                                       8.5 12
+                                       C8.5 15,
+                                       9.7 18,
+                                       12 20.5"
+                                />
+
+                                <path
+                                    d="M12 3.5
+                                       C14.3 6,
+                                       15.5 9,
+                                       15.5 12
+                                       C15.5 15,
+                                       14.3 18,
+                                       12 20.5"
+                                />
+
+                            </svg>
+
+
+                            {% elif "availability" in item.label|lower %}
+
+                            <!-- CLOCK SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                />
+
+                                <path d="M12 7V12L15.5 14" />
+
+                            </svg>
+
+
+                            {% elif "location" in item.label|lower %}
+
+                            <!-- LOCATION SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <path
+                                    d="M19 10
+                                       C19 15,
+                                       12 20,
+                                       12 20
+                                       C12 20,
+                                       5 15,
+                                       5 10
+                                       A7 7 0 0 1 19 10Z"
+                                />
+
+                                <circle
+                                    cx="12"
+                                    cy="10"
+                                    r="2.2"
+                                />
+
+                            </svg>
+
+
+                            {% elif "work" in item.label|lower
+                                  or "preference" in item.label|lower %}
+
+                            <!-- WORK SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <rect
+                                    x="4"
+                                    y="7"
+                                    width="16"
+                                    height="12"
+                                    rx="2"
+                                />
+
+                                <path
+                                    d="M9 7
+                                       V5
+                                       H15
+                                       V7"
+                                />
+
+                                <path
+                                    d="M4 12
+                                       H20"
+                                />
+
+                                <path
+                                    d="M10 12
+                                       V14
+                                       H14
+                                       V12"
+                                />
+
+                            </svg>
+
+
+                            {% else %}
+
+                            <!-- DEFAULT INFO SVG -->
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true"
+                            >
+
+                                <circle
+                                    cx="12"
+                                    cy="12"
+                                    r="8.5"
+                                />
+
+                                <path d="M12 11V16" />
+
+                                <circle
+                                    cx="12"
+                                    cy="7.5"
+                                    r="0.7"
+                                    fill="currentColor"
+                                    stroke="none"
+                                />
+
+                            </svg>
+
+                            {% endif %}
+
+
+                        </span>
+
+
+                        {{ item.label }}
+
+
+                    </div>
+
+
+                    <!-- VALUE -->
+
+                    <div class="personal-value">
+
+                        {{ item.value }}
+
+                    </div>
+
+
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             CAREER OBJECTIVE
+        ================================================== -->
+
+        {% if career_objective %}
+
+        <section class="about-section-block">
+
+
+            <!-- SECTION HEADING -->
+
+            <div class="about-section-heading">
+
+    <h2>
+        Career Objective
+    </h2>
+
+    <span class="section-heading-line"></span>
+
+</div>
+
+            <!-- OBJECTIVE BOX -->
+
+            <div class="career-objective-box">
+
+
+                <!-- TARGET SVG -->
+
+                <div class="objective-icon">
+
+
+                    <svg
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                    >
+
+                        <circle
+                            cx="16"
+                            cy="16"
+                            r="11"
+                        />
+
+                        <circle
+                            cx="16"
+                            cy="16"
+                            r="6"
+                        />
+
+                        <circle
+                            cx="16"
+                            cy="16"
+                            r="2"
+                            fill="currentColor"
+                            stroke="none"
+                        />
+
+                        <path
+                            d="M21 11L27 5"
+                        />
+
+                        <path
+                            d="M23 5H27V9"
+                        />
+
+                    </svg>
+
+
+                </div>
+
+
+                <!-- VERTICAL DIVIDER -->
+
+                <div class="objective-divider"></div>
+
+
+                <!-- OBJECTIVE CONTENT -->
+
+                <p>
+
+                    {{ career_objective.objective }}
+
+                </p>
+
+
+            </div>
+
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- =================================================
+         <!-- =================================================
+     CAREER INTERESTS
+================================================== -->
+
+{% if career_interests %}
+
+<section class="about-section-block">
+
+
+    <!-- SECTION HEADING -->
+
+    <div class="about-section-heading">
+
+    <h2>
+        Career Interests
+    </h2>
+
+    <span class="section-heading-line"></span>
+
+</div>
+
+    <!-- INTEREST CARDS -->
+
+    <div class="career-interests">
+
+
+        {% for interest in career_interests %}
+
+        <div class="career-interest">
+
+
+            <!-- NUMBER -->
+
+            <span class="interest-number">
+
+                {{ forloop.counter|stringformat:"02d" }}
+
+            </span>
+
+
+            <!-- SMALL BLUE LINE -->
+
+            <span class="interest-top-line"></span>
+
+
+            <!-- ICON -->
+
+            <span class="interest-icon">
+
+
+                {% if interest.short_code == "AI" %}
+
+                <!-- ============================
+                     ARTIFICIAL INTELLIGENCE
+                     BRAIN SVG
+                ============================= -->
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path
+                        d="M9 5
+                           C7 3 4 4 4 7
+                           C2 7 2 11 4 12
+                           C2 14 3 18 6 18
+                           C6 21 10 21 11 18
+                           V7
+                           C11 6 10 5 9 5Z"
+                    />
+
+                    <path
+                        d="M15 5
+                           C17 3 20 4 20 7
+                           C22 7 22 11 20 12
+                           C22 14 21 18 18 18
+                           C18 21 14 21 13 18
+                           V7
+                           C13 6 14 5 15 5Z"
+                    />
+
+                    <path d="M8 9H9" />
+
+                    <path d="M15 9H16" />
+
+                    <path d="M8 13H9" />
+
+                    <path d="M15 13H16" />
+
+                    <path d="M11 11H13" />
+
+                </svg>
+
+
+                {% elif interest.short_code == "DA" %}
+
+                <!-- ============================
+                     DATA ANALYTICS
+                     BAR CHART SVG
+                ============================= -->
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path d="M5 19V11" />
+
+                    <path d="M10 19V7" />
+
+                    <path d="M15 19V4" />
+
+                    <path d="M20 19V9" />
+
+                    <path d="M3 19H21" />
+
+                </svg>
+
+
+                {% elif interest.short_code == "SD" %}
+
+                <!-- ============================
+                     SOFTWARE DEVELOPMENT
+                     CODE SVG
+                ============================= -->
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path d="M9 7L4 12L9 17" />
+
+                    <path d="M15 7L20 12L15 17" />
+
+                    <path d="M13 4L11 20" />
+
+                </svg>
+
+
+                {% else %}
+
+                <!-- ============================
+                     DEFAULT CODE ICON
+                ============================= -->
+
+                <svg
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                >
+
+                    <path d="M9 7L4 12L9 17" />
+
+                    <path d="M15 7L20 12L15 17" />
+
+                </svg>
+
+                {% endif %}
+
+
+            </span>
+
+
+            <!-- TITLE -->
+
+            <h3>
+                {{ interest.title }}
+            </h3>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+</section>
+
+{% endif %}
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,707 @@
+{% extends "base.html" %}
+
+{% block title %}My Skills | Asfand Amjad{% endblock %}
+
+{% block content %}
+
+<style>
+    /* =========================================================
+       SKILLS PAGE
+    ========================================================= */
+
+    .skills-page {
+        max-width: 1050px;
+        margin: 0 auto;
+        padding: 80px 24px 100px;
+    }
+
+
+    /* =========================================================
+       PAGE HEADING
+    ========================================================= */
+
+    .skills-heading {
+        margin-bottom: 50px;
+    }
+
+    .skills-heading h1 {
+    margin: 0;
+    font-size: clamp(46px, 5.5vw, 68px);
+    line-height: 0.98;
+    font-weight: 750;
+    letter-spacing: -0.055em;
+    color: var(--text);
+}
+
+    .skills-heading h1 span {
+        color: var(--accent);
+    }
+
+    .heading-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+    }
+
+    .heading-line::before {
+    content: "";
+    width: 64px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--accent);
+}
+
+    .heading-line::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--accent);
+    }
+
+
+    /* =========================================================
+       CATEGORY CONTAINER
+    ========================================================= */
+
+    .skills-categories {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    .skill-category {
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--surface);
+        overflow: hidden;
+
+        transition:
+            border-color 0.3s ease,
+            box-shadow 0.3s ease,
+            transform 0.3s ease;
+    }
+
+    .skill-category:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    [data-theme="dark"] .skill-category:hover {
+        box-shadow: 0 12px 35px rgba(79, 140, 255, 0.10);
+    }
+
+    [data-theme="light"] .skill-category:hover {
+        box-shadow: 0 10px 28px rgba(37, 99, 235, 0.08);
+    }
+
+
+    /* =========================================================
+       CATEGORY HEADER
+    ========================================================= */
+
+    .category-header {
+        width: 100%;
+        min-height: 94px;
+
+        padding: 20px 28px;
+
+        border: 0;
+        outline: 0;
+
+        display: flex;
+        align-items: center;
+        gap: 17px;
+
+        background: transparent;
+        color: var(--text);
+
+        cursor: pointer;
+        text-align: left;
+
+        font-family: inherit;
+    }
+
+    .category-header:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: -3px;
+    }
+
+
+    /* =========================================================
+       CATEGORY ICON
+    ========================================================= */
+
+    .category-icon {
+        width: 48px;
+        height: 48px;
+
+        flex: 0 0 48px;
+
+        border-radius: 13px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        font-size: 17px;
+        font-weight: 700;
+
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+
+    .skill-category.is-open .category-icon {
+        transform: scale(1.04);
+    }
+
+
+    /* =========================================================
+       CATEGORY TITLE
+    ========================================================= */
+
+    .category-title {
+        flex: 1;
+
+        margin: 0;
+
+        color: var(--text);
+
+        font-size: 21px;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+
+    /* =========================================================
+       ARROW
+    ========================================================= */
+
+    .category-arrow {
+        width: 10px;
+        height: 10px;
+
+        margin-right: 5px;
+
+        border-right: 2px solid var(--accent);
+        border-bottom: 2px solid var(--accent);
+
+        transform: rotate(45deg);
+
+        transition:
+            transform 0.3s ease;
+    }
+
+    .skill-category.is-open .category-arrow {
+        transform: rotate(225deg);
+        margin-top: 6px;
+    }
+
+
+    /* =========================================================
+       ACCORDION CONTENT
+    ========================================================= */
+
+    .category-content {
+        display: grid;
+        grid-template-rows: 0fr;
+
+        transition:
+            grid-template-rows 0.35s ease;
+    }
+
+    .skill-category.is-open .category-content {
+        grid-template-rows: 1fr;
+    }
+
+    .category-content-inner {
+        min-height: 0;
+        overflow: hidden;
+    }
+
+
+    /* =========================================================
+       SKILLS LIST
+    ========================================================= */
+
+    .skills-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        padding: 0 28px 28px;
+    }
+
+
+    /* =========================================================
+       INDIVIDUAL SKILL ROW
+    ========================================================= */
+
+    .skill-item {
+        min-height: 68px;
+
+        display: flex;
+        align-items: center;
+        gap: 14px;
+
+        padding: 11px 18px;
+
+        border: 1px solid var(--border);
+        border-radius: 13px;
+
+        background: transparent;
+        color: var(--text);
+
+        transition:
+            transform 0.25s ease,
+            border-color 0.25s ease,
+            background-color 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .skill-item:hover {
+        transform: translateX(6px);
+
+        border-color: var(--accent);
+
+        background: color-mix(
+            in srgb,
+            var(--accent) 5%,
+            var(--surface)
+        );
+
+        box-shadow:
+            0 6px 20px
+            color-mix(
+                in srgb,
+                var(--accent) 10%,
+                transparent
+            );
+    }
+
+
+    /* =========================================================
+       BULLET
+    ========================================================= */
+
+    .skill-bullet {
+        width: 7px;
+        height: 7px;
+
+        flex: 0 0 7px;
+
+        border-radius: 50%;
+
+        background: var(--accent);
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .skill-item:hover .skill-bullet {
+        transform: scale(1.5);
+
+        box-shadow:
+            0 0 10px
+            color-mix(
+                in srgb,
+                var(--accent) 55%,
+                transparent
+            );
+    }
+
+
+    /* =========================================================
+       SKILL NAME
+    ========================================================= */
+
+    .skill-name {
+        flex: 1;
+
+        color: var(--text);
+
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    .skill-logo-wrapper {
+        width: 48px;
+        height: 48px;
+
+        flex: 0 0 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .skill-logo {
+        display: block;
+
+        max-width: 40px;
+        max-height: 40px;
+
+        width: auto;
+        height: auto;
+
+        object-fit: contain;
+
+        transition:
+            transform 0.25s ease;
+    }
+
+    .skill-item:hover .skill-logo {
+        transform: scale(1.12);
+    }
+
+
+    /* =========================================================
+       LOGO PLACEHOLDER
+    ========================================================= */
+
+    .skill-logo-placeholder {
+        width: 36px;
+        height: 36px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 9px;
+
+        background: var(--accent);
+        color: #ffffff;
+
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+
+    /* =========================================================
+       EMPTY STATE
+    ========================================================= */
+
+    .no-skills {
+        padding: 3px 0;
+
+        color: var(--text-muted);
+
+        font-size: 15px;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 600px) {
+
+        .skills-page {
+            padding: 55px 18px 75px;
+        }
+
+        .skills-heading {
+            margin-bottom: 38px;
+        }
+
+        .skills-heading h1 {
+            font-size: 44px;
+            letter-spacing: -1.8px;
+        }
+
+        .heading-line {
+            margin-top: 17px;
+        }
+
+        .heading-line::before {
+            width: 65px;
+        }
+
+        .category-header {
+            min-height: 78px;
+            padding: 17px 18px;
+            gap: 13px;
+        }
+
+        .category-icon {
+            width: 43px;
+            height: 43px;
+            flex-basis: 43px;
+            border-radius: 11px;
+        }
+
+        .category-title {
+            font-size: 18px;
+        }
+
+        .skills-list {
+            padding: 0 18px 20px;
+        }
+
+        .skill-item {
+            min-height: 62px;
+            padding: 9px 13px;
+        }
+
+        .skill-name {
+            font-size: 16px;
+        }
+
+        .skill-logo-wrapper {
+            width: 42px;
+            height: 42px;
+            flex-basis: 42px;
+        }
+
+        .skill-logo {
+            max-width: 34px;
+            max-height: 34px;
+        }
+    }
+
+
+    /* =========================================================
+       REDUCED MOTION
+    ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+        .skill-category,
+        .category-icon,
+        .category-arrow,
+        .category-content,
+        .skill-item,
+        .skill-bullet,
+        .skill-logo {
+            transition: none;
+        }
+    }
+</style>
+
+
+<main class="skills-page">
+
+    <!-- =====================================================
+         PAGE HEADING
+    ====================================================== -->
+
+    <header class="skills-heading">
+
+        <h1>
+            My <span>Skills</span>
+        </h1>
+
+        <div class="heading-line"></div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SKILL CATEGORIES
+    ====================================================== -->
+
+    <section class="skills-categories">
+
+        {% for category in categories %}
+
+            <article
+                class="skill-category
+                {% if forloop.first %}is-open{% endif %}"
+            >
+
+                <!-- CATEGORY HEADER -->
+
+                <button
+                    type="button"
+                    class="category-header"
+                    aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+                >
+
+                    <div class="category-icon">
+
+                        {% if category.icon %}
+                            {{ category.icon }}
+                        {% else %}
+                            {{ category.name|first }}
+                        {% endif %}
+
+                    </div>
+
+
+                    <h2 class="category-title">
+                        {{ category.name }}
+                    </h2>
+
+
+                    <span
+                        class="category-arrow"
+                        aria-hidden="true"
+                    ></span>
+
+                </button>
+
+
+                <!-- CATEGORY CONTENT -->
+
+                <div class="category-content">
+
+                    <div class="category-content-inner">
+
+                        <div class="skills-list">
+
+                            {% for skill in category.skills.all %}
+
+                                {% if skill.is_active %}
+
+                                    <div class="skill-item">
+
+                                        <!-- Bullet -->
+
+                                        <span
+                                            class="skill-bullet"
+                                            aria-hidden="true"
+                                        ></span>
+
+
+                                        <!-- Name -->
+
+                                        <span class="skill-name">
+                                            {{ skill.name }}
+                                        </span>
+
+
+                                        <!-- Logo -->
+
+                                        <div class="skill-logo-wrapper">
+
+                                            {% if skill.logo %}
+
+                                                <img
+                                                    src="{{ skill.logo.url }}"
+                                                    alt="{{ skill.name }} logo"
+                                                    class="skill-logo"
+                                                >
+
+                                            {% else %}
+
+                                                <div
+                                                    class="skill-logo-placeholder"
+                                                    aria-hidden="true"
+                                                >
+                                                    {{ skill.name|first }}
+                                                </div>
+
+                                            {% endif %}
+
+                                        </div>
+
+                                    </div>
+
+                                {% endif %}
+
+                            {% empty %}
+
+                                <span class="no-skills">
+                                    No skills added yet.
+                                </span>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        {% empty %}
+
+            <p class="no-skills">
+                No skill categories have been added yet.
+            </p>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+
+<!-- =========================================================
+     ACCORDION JAVASCRIPT
+========================================================= -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const categories =
+            document.querySelectorAll(".skill-category");
+
+
+        categories.forEach(function (category) {
+
+            const button =
+                category.querySelector(".category-header");
+
+
+            button.addEventListener("click", function () {
+
+                const isCurrentlyOpen =
+                    category.classList.contains("is-open");
+
+
+                /*
+                 * Close every category
+                 */
+
+                categories.forEach(function (item) {
+
+                    item.classList.remove("is-open");
+
+                    const itemButton =
+                        item.querySelector(".category-header");
+
+                    itemButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                });
+
+
+                /*
+                 * Open clicked category
+                 */
+
+                if (!isCurrentlyOpen) {
+
+                    category.classList.add("is-open");
+
+                    button.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                }
+
+            });
+
+        });
+
+    });
+</script>
+
+{% endblock %}

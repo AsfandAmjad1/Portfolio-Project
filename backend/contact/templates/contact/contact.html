@@ -1,0 +1,726 @@
+{% extends "base.html" %}
+
+{% block title %}
+Contact | Asfand Amjad
+{% endblock %}
+
+{% block content %}
+
+<style>
+    /* =========================================================
+       CONTACT PAGE
+    ========================================================= */
+
+    .contact-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 110px 28px 90px;
+    }
+
+    .contact-layout {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 70px;
+        align-items: start;
+    }
+
+
+    /* =========================================================
+       LEFT SIDE
+    ========================================================= */
+
+    .contact-left {
+        padding-top: 55px;
+    }
+
+    .contact-heading {
+        margin: 0;
+        font-size: clamp(2.5rem, 5vw, 4.2rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        color: var(--text-primary, #ffffff);
+    }
+
+    .contact-heading span {
+        color: #1683ff;
+    }
+
+    .contact-heading-line {
+        width: 70px;
+        height: 3px;
+        background: #1683ff;
+        margin-top: 25px;
+        border-radius: 10px;
+    }
+
+    .contact-info-title {
+        margin: 55px 0 30px;
+        font-size: 1.45rem;
+        line-height: 1.3;
+        font-weight: 650;
+        color: var(--text-primary, #ffffff);
+    }
+
+    .contact-info-list {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+    }
+
+    .contact-icon {
+        width: 58px;
+        height: 58px;
+        flex-shrink: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(22, 131, 255, 0.25);
+        border-radius: 12px;
+
+        background: rgba(22, 131, 255, 0.06);
+        color: #1683ff;
+    }
+
+    .contact-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .contact-item-content {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        min-width: 0;
+    }
+
+    .contact-item-label {
+        font-size: 0.92rem;
+        line-height: 1.3;
+        font-weight: 600;
+        color: var(--text-primary, #ffffff);
+    }
+
+    .contact-item-value {
+        font-size: 0.98rem;
+        line-height: 1.5;
+        color: var(--text-secondary, #94a3b8);
+        text-decoration: none;
+        word-break: break-word;
+        transition: color 0.25s ease;
+    }
+
+    a.contact-item-value:hover {
+        color: #1683ff;
+    }
+
+    .social-link {
+        color: #1683ff;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+    }
+
+
+    /* =========================================================
+       RIGHT SIDE — FORM
+    ========================================================= */
+
+    .contact-form-card {
+        padding: 42px;
+
+        border: 1px solid rgba(22, 131, 255, 0.22);
+        border-radius: 18px;
+
+        background: rgba(10, 25, 40, 0.45);
+
+        box-shadow:
+            0 20px 60px rgba(0, 0, 0, 0.18);
+    }
+
+    .contact-form-title {
+        margin: 0 0 30px;
+
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        line-height: 1.1;
+
+        letter-spacing: -0.035em;
+        font-weight: 700;
+
+        color: var(--text-primary, #ffffff);
+    }
+
+    .contact-form-title span {
+        color: #1683ff;
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+    }
+
+    .form-group label {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        font-weight: 600;
+        color: var(--text-primary, #ffffff);
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        box-sizing: border-box;
+
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        border-radius: 9px;
+
+        padding: 14px 16px;
+
+        font-family: inherit;
+        font-size: 0.92rem;
+        line-height: 1.5;
+
+        color: #ffffff;
+        background: rgba(15, 35, 52, 0.7);
+
+        outline: none;
+
+        transition:
+            border-color 0.25s ease,
+            box-shadow 0.25s ease,
+            background 0.25s ease;
+    }
+
+    .form-group input {
+        height: 50px;
+    }
+
+    .form-group textarea {
+        min-height: 145px;
+        resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+        color: #7890a7;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: #1683ff;
+
+        box-shadow:
+            0 0 0 3px rgba(22, 131, 255, 0.10);
+    }
+
+
+    /* =========================================================
+       SEND BUTTON
+    ========================================================= */
+
+    .send-message-button {
+        width: 100%;
+        height: 54px;
+
+        margin-top: 4px;
+
+        border: none;
+        border-radius: 9px;
+
+        background: #1683ff;
+        color: #ffffff;
+
+        font-family: inherit;
+        font-size: 0.98rem;
+        font-weight: 650;
+
+        cursor: pointer;
+
+        transition:
+            background 0.25s ease,
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+    .send-message-button:hover {
+        background: #0875ee;
+
+        transform: translateY(-2px);
+
+        box-shadow:
+            0 10px 25px rgba(22, 131, 255, 0.25);
+    }
+
+    .send-message-button:active {
+        transform: translateY(0);
+    }
+
+
+    /* =========================================================
+       LIGHT MODE
+    ========================================================= */
+
+    html[data-theme="light"] .contact-heading,
+    html[data-theme="light"] .contact-info-title,
+    html[data-theme="light"] .contact-item-label,
+    html[data-theme="light"] .contact-form-title,
+    html[data-theme="light"] .form-group label {
+        color: #0f172a !important;
+    }
+
+    html[data-theme="light"] .contact-item-value {
+        color: #475569 !important;
+    }
+
+    html[data-theme="light"] .contact-form-card {
+        background: #ffffff !important;
+        border-color: rgba(15, 23, 42, 0.10) !important;
+
+        box-shadow:
+            0 20px 60px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    html[data-theme="light"] .contact-icon {
+        background: rgba(22, 131, 255, 0.06) !important;
+        border-color: rgba(22, 131, 255, 0.18) !important;
+    }
+
+    html[data-theme="light"] .form-group input,
+    html[data-theme="light"] .form-group textarea {
+        background: #ffffff !important;
+        color: #0f172a !important;
+
+        border-color: rgba(15, 23, 42, 0.15) !important;
+    }
+
+    html[data-theme="light"] .form-group input::placeholder,
+    html[data-theme="light"] .form-group textarea::placeholder {
+        color: #94a3b8 !important;
+    }
+
+    html[data-theme="light"] .form-group input:focus,
+    html[data-theme="light"] .form-group textarea:focus {
+        border-color: #1683ff !important;
+
+        box-shadow:
+            0 0 0 3px rgba(22, 131, 255, 0.10) !important;
+    }
+
+    html[data-theme="light"] a.contact-item-value:hover {
+        color: #1683ff !important;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE — TABLET
+    ========================================================= */
+
+    @media (max-width: 900px) {
+
+        .contact-page {
+            padding: 90px 22px 70px;
+        }
+
+        .contact-layout {
+            grid-template-columns: 1fr;
+            gap: 55px;
+        }
+
+        .contact-left {
+            padding-top: 0;
+        }
+
+        .contact-form-card {
+            padding: 32px;
+        }
+    }
+
+
+    /* =========================================================
+       RESPONSIVE — MOBILE
+    ========================================================= */
+
+    @media (max-width: 600px) {
+
+        .contact-page {
+            padding: 80px 18px 60px;
+        }
+
+        .contact-heading {
+            font-size: 2.8rem;
+        }
+
+        .contact-info-title {
+            margin-top: 45px;
+        }
+
+        .contact-form-card {
+            padding: 25px 20px;
+            border-radius: 14px;
+        }
+
+        .contact-form-title {
+            font-size: 2rem;
+        }
+
+        .contact-icon {
+            width: 52px;
+            height: 52px;
+        }
+
+        .contact-item-value {
+            font-size: 0.92rem;
+        }
+    }
+</style>
+
+
+<section class="contact-page">
+
+    <div class="contact-layout">
+
+
+        <!-- =====================================================
+             LEFT — CONTACT INFORMATION
+        ====================================================== -->
+
+        <div class="contact-left">
+
+            <h1 class="contact-heading">
+                Get in <span>Touch</span>
+            </h1>
+
+            <div class="contact-heading-line"></div>
+
+
+            <h2 class="contact-info-title">
+                Contact Information
+            </h2>
+
+
+            <div class="contact-info-list">
+
+
+                <!-- ================= NAME ================= -->
+
+                <div class="contact-info-item">
+
+                    <div class="contact-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="7" r="4"></circle>
+                            <path d="M5 21c0-3.9 3.1-7 7-7s7 3.1 7 7"></path>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="contact-item-content">
+
+                        <span class="contact-item-label">
+                            Name
+                        </span>
+
+                        <span class="contact-item-value">
+                            {{ contact_info.name|default:"Asfand Amjad" }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <div class="contact-info-item">
+
+                    <div class="contact-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect
+                                x="3"
+                                y="5"
+                                width="18"
+                                height="14"
+                                rx="2"
+                            ></rect>
+
+                            <path d="m3 7 9 6 9-6"></path>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="contact-item-content">
+
+                        <span class="contact-item-label">
+                            Email
+                        </span>
+
+
+                        <a
+                            href="https://mail.google.com/mail/?view=cm&fs=1&to={{ contact_info.email|default:'asfand.amjad1@gmail.com' }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-item-value"
+                        >
+                            {{ contact_info.email|default:"asfand.amjad1@gmail.com" }}
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= GITHUB ================= -->
+
+                <div class="contact-info-item">
+
+                    <div class="contact-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path d="M12 .7A11.3 11.3 0 0 0 8.4 22.8c.6.1.8-.3.8-.6v-2.2c-3.1.7-3.8-1.3-3.8-1.3-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 .1.7 1.9 2.7 1.3.7.4 1.2.7 1.5-2.5.3-5.1 1.3-5.1 5.6 0 1.2.4 2.2 1.1 3-.1.3-.5 1.5.1 3.1 0 0 .9-.3 3.1 1.1a10.7 10.7 0 0 1 5.6 0c2.1-1.4 3-1.1 3-1.1.6 1.6.2 2.8.1 3.1.7.8 1.1 1.8 1.1 3 0 4.3-2.6 5.3-5.1 5.6.4.3.7 1 .7 2v2.9c0 .3.2.7.8.6A11.3 11.3 0 0 0 12 .7Z"></path>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="contact-item-content">
+
+                        <span class="contact-item-label">
+                            GitHub
+                        </span>
+
+
+                        <a
+                            href="{{ contact_info.github_url|default:'https://github.com/AsfandAmjad1' }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-item-value social-link"
+                        >
+                            Asfand Amjad
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= LINKEDIN ================= -->
+
+                <div class="contact-info-item">
+
+                    <div class="contact-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path d="M6.5 8.3H3.2V21h3.3V8.3ZM4.8 3A2 2 0 1 0 4.8 7 2 2 0 0 0 4.8 3ZM21 13.7c0-3.8-2-5.6-4.7-5.6-2.2 0-3.2 1.2-3.8 2v-1.8H9.2V21h3.3v-6.3c0-1.7.3-3.4 2.5-3.4 2.1 0 2.1 2 2.1 3.5V21h3.3l.1-7.3Z"></path>
+                        </svg>
+
+                    </div>
+
+
+                    <div class="contact-item-content">
+
+                        <span class="contact-item-label">
+                            LinkedIn
+                        </span>
+
+
+                        <a
+                            href="{{ contact_info.linkedin_url|default:'https://www.linkedin.com/in/asfand-amjad-270845330/' }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-item-value social-link"
+                        >
+                            Asfand Amjad
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             RIGHT — CONTACT FORM
+        ====================================================== -->
+
+        <div class="contact-form-card">
+
+            <h2 class="contact-form-title">
+                Let's Work <span>Together</span>
+            </h2>
+
+
+            <form
+                class="contact-form"
+                method="POST"
+                action="https://formsubmit.co/asfand.amjad1@gmail.com"
+            >
+
+            <input
+    type="hidden"
+    name="_url"
+    value="http://127.0.0.1:8000/contact/"
+>
+
+                <!-- FormSubmit settings -->
+
+                <input
+                    type="hidden"
+                    name="_subject"
+                    value="New Portfolio Contact Message"
+                >
+
+                <input
+                    type="hidden"
+                    name="_template"
+                    value="table"
+                >
+
+                <input
+                    type="hidden"
+                    name="_captcha"
+                    value="true"
+                >
+
+                <input
+                    type="hidden"
+                    name="_autoresponse"
+                    value="Thank you for contacting Asfand Amjad. Your message has been received successfully. I will get back to you as soon as possible."
+                >
+
+
+                <!-- ================= FULL NAME ================= -->
+
+                <div class="form-group">
+
+                    <label for="full_name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="full_name"
+                        name="full_name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ================= EMAIL ================= -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ================= SUBJECT ================= -->
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        placeholder="What's this about?"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ================= MESSAGE ================= -->
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Write your message here..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ================= BUTTON ================= -->
+
+                <button
+                    type="submit"
+                    class="send-message-button"
+                >
+                    Send Message
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

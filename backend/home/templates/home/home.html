@@ -1,24 +1,2903 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ profile.name }} | Portfolio</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    {% if profile %}
-        <h1>{{ profile.greeting }}</h1>
+{% block title %}Asfand Amjad | Data Analyst, Software Developer & AI Engineer{% endblock %}
 
-        <h2>{{ profile.name }}</h2>
+{% block content %}
 
-        <h3>{{ profile.professional_title }}</h3>
+<main class="home-page">
 
-        <p>{{ profile.introduction }}</p>
+    <!-- =========================
+         HERO
+    ========================== -->
+    <section class="hero-section">
+        <div class="container hero-grid">
+
+            <div class="hero-content reveal">
+                {% if profile %}
+                    <span class="hero-greeting">
+                        {{ profile.greeting }}
+                    </span>
+
+                    <h1 class="hero-name">
+                        {{ profile.name }}
+                    </h1>
+
+                    <h2 class="hero-title">
+                        {{ profile.professional_title }}
+                    </h2>
+
+                    <p class="hero-introduction">
+                        {{ profile.introduction }}
+                    </p>
+
+                    <div class="hero-actions">
+                        {% if profile.work_button_url %}
+                            <a href="{{ profile.work_button_url }}" class="btn btn-primary">
+                                {{ profile.work_button_text }}
+                            </a>
+                        {% endif %}
+
+                        {% if profile.resume %}
+                            <a href="{{ profile.resume.url }}"
+                               class="btn btn-secondary"
+                               target="_blank"
+                               rel="noopener">
+                                {{ profile.cv_button_text }}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="hero-visual reveal">
+
+    {% if profile and profile.profile_image %}
+
+        <div class="hero-profile">
+
+            <div class="hero-profile-layer hero-profile-layer-one"></div>
+
+            <div class="hero-profile-layer hero-profile-layer-two"></div>
+
+            <span class="hero-profile-accent"></span>
+
+            <div class="hero-profile-image">
+                <img src="{{ profile.profile_image.url }}"
+                     alt="{{ profile.name }}"
+                     loading="eager">
+            </div>
+
+            <div class="hero-profile-dots" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            
+
+        </div>
+
     {% else %}
-        <h1>Portfolio</h1>
-        <p>No active profile is available.</p>
+
+        <div class="profile-placeholder">
+            <span>AA</span>
+        </div>
+
     {% endif %}
 
-</body>
-</html>
+</div>
+
+        </div>
+    </section>
+
+
+    <!-- =========================
+         STATS
+    ========================== -->
+    {% if stats %}
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+
+                <div class="stat-card reveal">
+                    <span class="stat-number">
+                        {{ projects_count }}+
+                    </span>
+                    <span class="stat-label">
+                        Projects
+                    </span>
+                </div>
+
+                <div class="stat-card reveal">
+                    <span class="stat-number">
+                        {{ experience_years }}
+                    </span>
+                    <span class="stat-label">
+                        Years Experience
+                    </span>
+                </div>
+
+                <div class="stat-card reveal">
+                    <span class="stat-number">
+                        {{ technologies_count }}+
+                    </span>
+                    <span class="stat-label">
+                        Technologies
+                    </span>
+                </div>
+
+                <div class="stat-card reveal">
+                    <span class="stat-number">
+                        {{ stats.achievements_count }}+
+                    </span>
+                    <span class="stat-label">
+                        Happy Clients
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <!-- =========================
+         SERVICES
+    ========================== -->
+    {% if services %}
+    <section class="home-section services-section">
+        <div class="container">
+
+            {% if sections.services %}
+                <div class="section-heading reveal">
+                    {% if sections.services.label %}
+                        <span class="section-label">
+                            {{ sections.services.label }}
+                        </span>
+                    {% endif %}
+
+                    <h2>
+                        {{ sections.services.title }}
+                    </h2>
+
+                    {% if sections.services.description %}
+                        <p>
+                            {{ sections.services.description }}
+                        </p>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            <div class="services-grid">
+
+                {% for service in services %}
+                    <article class="service-card reveal">
+
+                        <div class="service-top">
+                            <span class="service-code">
+                                {{ service.short_code }}
+                            </span>
+
+                            <span class="service-number">
+                                0{{ forloop.counter }}
+                            </span>
+                        </div>
+
+                        <div class="service-content">
+                            <h3>
+                                {{ service.title }}
+                            </h3>
+
+                            <p>
+                                {{ service.description }}
+                            </p>
+                        </div>
+
+                    </article>
+                {% endfor %}
+
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+
+    <!-- =========================
+     FEATURED PROJECTS
+========================== -->
+{% if featured_projects %}
+<section class="home-section projects-section">
+    <div class="container">
+
+        {% if sections.projects %}
+            <div class="section-heading reveal">
+
+                {% if sections.projects.label %}
+                    <span class="section-label">
+                        {{ sections.projects.label }}
+                    </span>
+                {% endif %}
+
+                <h2>
+                    {{ sections.projects.title }}
+                </h2>
+
+                {% if sections.projects.description %}
+                    <p>
+                        {{ sections.projects.description }}
+                    </p>
+                {% endif %}
+
+            </div>
+        {% endif %}
+
+
+        <!-- Top 3 Projects -->
+        <div class="projects-grid">
+
+            {% for project in featured_projects %}
+
+                <article class="project-card reveal">
+
+                    {% if project.image %}
+                        <div class="project-image">
+                            <img
+                                src="{{ project.image.url }}"
+                                alt="{{ project.title }}"
+                                loading="lazy"
+                            >
+                        </div>
+                    {% else %}
+                        <div class="project-image project-image-placeholder">
+                            <span>{{ project.category|upper }}</span>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="project-card-content">
+
+                        <div class="project-meta">
+
+                            <span>
+                                {{ project.category|title }}
+                            </span>
+
+                            {% if project.is_featured %}
+                                <span class="featured-badge">
+                                    Featured
+                                </span>
+                            {% endif %}
+
+                        </div>
+
+
+                        <h4>
+                            {{ project.title }}
+                        </h4>
+
+
+                        <p>
+                            {{ project.short_description }}
+                        </p>
+
+
+                        {% if project.technologies %}
+                            <div class="project-tech">
+                                {{ project.technologies }}
+                            </div>
+                        {% endif %}
+
+
+                        <div class="project-links">
+
+                            {% if project.github_url %}
+                                <a
+                                    href="{{ project.github_url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    GitHub ↗
+                                </a>
+                            {% endif %}
+
+                            {% if project.live_url %}
+                                <a
+                                    href="{{ project.live_url }}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Live Project ↗
+                                </a>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- View All Projects -->
+        <div class="all-projects-action reveal">
+            <a
+                href="{% url 'projects:projects' %}"
+                class="btn btn-secondary"
+            >
+                View All Projects
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endif %}
+
+
+            
+            
+<!-- =========================
+     MY PROCESS
+========================= -->
+
+<section class="home-section process-section" id="process">
+    <div class="container">
+
+        <!-- Process Heading -->
+        <div class="process-header reveal">
+
+            <div class="process-eyebrow">
+                <span></span>
+                {{ sections.process.label|default:"HOW I WORK" }}
+            </div>
+
+            <h2>
+                {{ sections.process.title|default:"My Process" }}
+            </h2>
+
+            <p>
+                {{ sections.process.description }}
+            </p>
+
+        </div>
+
+
+        <!-- Process Diagram -->
+        <div class="process-diagram reveal">
+
+            {% for step in process_steps %}
+
+            <div class="process-step">
+
+                <!-- Number -->
+                <div class="process-number">
+                    {{ step.step_number|stringformat:"02d" }}
+                </div>
+
+
+                <!-- Icon -->
+                <div class="process-icon">
+
+                    {% if step.step_number == 1 %}
+                        <span class="process-icon-symbol">⌕</span>
+                    {% elif step.step_number == 2 %}
+                        <span class="process-icon-symbol">▤</span>
+                    {% elif step.step_number == 3 %}
+                        <span class="process-icon-symbol">◇</span>
+                    {% elif step.step_number == 4 %}
+                        <span class="process-icon-symbol">&lt;/&gt;</span>
+                    {% elif step.step_number == 5 %}
+                        <span class="process-icon-symbol">⚙</span>
+                    {% else %}
+                        <span class="process-icon-symbol">↗</span>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Content -->
+                <div class="process-step-content">
+
+                    <h3>{{ step.title }}</h3>
+
+                    <div class="process-line"></div>
+
+                    <p>
+                        {{ step.description }}
+                    </p>
+
+                </div>
+
+
+                <!-- Connector -->
+                {% if not forloop.last %}
+                    <div class="process-connector">
+                        <span></span>
+                        <b>→</b>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+    <!-- =========================
+         CTA
+    ========================== -->
+    {% if cta %}
+    <section class="cta-section">
+        <div class="container">
+
+            <div class="cta-card reveal">
+
+                {% if cta.label %}
+                    <span class="cta-label">
+                        {{ cta.label }}
+                    </span>
+                {% endif %}
+
+                <h2>
+                    {{ cta.title }}
+                </h2>
+
+                {% if cta.description %}
+                    <p>
+                        {{ cta.description }}
+                    </p>
+                {% endif %}
+
+                {% if cta.button_url %}
+                    <a href="{{ cta.button_url }}"
+                       class="btn btn-primary">
+                        {{ cta.button_text }}
+                    </a>
+                {% endif %}
+
+            </div>
+
+        </div>
+    </section>
+    {% endif %}
+
+</main>
+
+
+<!-- =========================
+     HOME PAGE STYLES
+========================== -->
+<style>
+
+.home-page {
+    overflow: hidden;
+}
+
+.container {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero-section {
+    min-height: calc(100vh - 90px);
+    display: flex;
+    align-items: center;
+    padding: 90px 0 80px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.hero-content {
+    max-width: 680px;
+}
+
+.hero-greeting {
+    display: inline-block;
+    margin-bottom: 16px;
+    color: #2563eb;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hero-name {
+    margin: 0;
+    font-size: clamp(3.2rem, 7vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.055em;
+    font-weight: 800;
+}
+
+.hero-title {
+    margin: 24px 0 18px;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.25;
+    font-weight: 600;
+}
+
+.hero-introduction {
+    max-width: 640px;
+    margin: 0;
+    line-height: 1.8;
+    font-size: 1.05rem;
+    opacity: 0.72;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-primary {
+    color: #ffffff;
+    background: #2563eb;
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    color: inherit;
+    border: 1px solid rgba(100, 116, 139, 0.35);
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    border-color: #2563eb;
+    color: #2563eb;
+}
+
+/* =========================================
+   PROFILE PICTURE
+========================================= */
+
+.hero-profile {
+    position: relative;
+    width: 440px;
+    height: 540px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Layer behind image */
+.hero-profile-layer {
+    position: absolute;
+
+    width: 350px;
+    height: 470px;
+
+    border-radius: 25px;
+
+    pointer-events: none;
+}
+
+.hero-profile-layer-one {
+    z-index: 1;
+
+    background: rgba(37, 99, 235, 0.10);
+    border: 1px solid rgba(37, 99, 235, 0.28);
+
+    transform: rotate(6deg) translate(25px, -18px);
+}
+
+.hero-profile-layer-two {
+    z-index: 0;
+
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(37, 99, 235, 0.16);
+
+    transform: rotate(10deg) translate(45px, 0);
+}
+
+
+/* Main picture */
+.hero-profile-image {
+    position: relative;
+    z-index: 3;
+
+    width: 350px;
+    height: 470px;
+
+    overflow: hidden;
+
+    border: 1px solid #3b82f6;
+    border-radius: 24px;
+
+    transform: rotate(-3deg);
+
+    background: #111827;
+
+    box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.30),
+        0 0 35px rgba(37, 99, 235, 0.12);
+
+    transition:
+        transform 400ms ease,
+        box-shadow 400ms ease;
+}
+
+.hero-profile-image:hover {
+    transform: rotate(-1deg) translateY(-6px);
+
+    box-shadow:
+        0 38px 85px rgba(0, 0, 0, 0.34),
+        0 0 45px rgba(37, 99, 235, 0.18);
+}
+
+.hero-profile-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    transform: scale(1.02);
+
+    transition: transform 500ms ease;
+}
+
+.hero-profile-image:hover img {
+    transform: scale(1.05);
+}
+
+
+/* Blue line */
+.hero-profile-accent {
+    position: absolute;
+    z-index: 4;
+
+    left: 18px;
+    top: 185px;
+
+    width: 3px;
+    height: 105px;
+
+    border-radius: 999px;
+
+    background: #2563eb;
+
+    box-shadow:
+        0 0 15px rgba(37, 99, 235, 0.40);
+}
+
+
+/* Dots */
+.hero-profile-dots {
+    position: absolute;
+    z-index: 5;
+
+    right: 12px;
+    top: 270px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.hero-profile-dots span {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    box-shadow:
+        0 0 10px rgba(37, 99, 235, 0.30);
+}
+
+.hero-profile-dots span:nth-child(2) {
+    opacity: 0.8;
+}
+
+.hero-profile-dots span:nth-child(3) {
+    opacity: 0.55;
+}
+
+.hero-profile-dots span:nth-child(4) {
+    opacity: 0.3;
+}
+
+.hero-profile-dots span:nth-child(5) {
+    opacity: 0.12;
+}
+
+
+/* Side message */
+.hero-profile-message {
+    position: absolute;
+    z-index: 6;
+
+    right: -70px;
+    top: 180px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 18px;
+
+    border-left: 2px solid #2563eb;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    line-height: 1.7;
+    letter-spacing: 2px;
+}
+
+
+/* Light Mode */
+html[data-theme="light"] .hero-profile-layer-one {
+    background: rgba(37, 99, 235, 0.08);
+    border-color: rgba(37, 99, 235, 0.18);
+}
+
+html[data-theme="light"] .hero-profile-layer-two {
+    background: rgba(37, 99, 235, 0.035);
+    border-color: rgba(37, 99, 235, 0.10);
+}
+
+html[data-theme="light"] .hero-profile-image {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 30px 70px rgba(15, 23, 42, 0.14),
+        0 0 35px rgba(37, 99, 235, 0.08);
+}
+
+html[data-theme="light"] .hero-profile-message {
+    color: #334155;
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+
+    .hero-profile {
+        transform: scale(0.90);
+    }
+
+    .hero-profile-message {
+        right: -35px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .hero-profile {
+        width: 330px;
+        height: 440px;
+    }
+
+    .hero-profile-image {
+        width: 285px;
+        height: 380px;
+    }
+
+    .hero-profile-layer {
+        width: 285px;
+        height: 380px;
+    }
+
+    .hero-profile-accent {
+        left: 5px;
+        top: 145px;
+    }
+
+    .hero-profile-dots {
+        right: -2px;
+        top: 230px;
+    }
+
+    .hero-profile-message {
+        display: none;
+    }
+}
+
+@media (max-width: 380px) {
+
+    .hero-profile {
+        transform: scale(0.82);
+    }
+}
+
+/* =========================
+   STATS — PROFESSIONAL
+========================= */
+
+.stats-section {
+    padding: 0 0 58px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat-card {
+    position: relative;
+    min-height: 135px;
+    padding: 28px 26px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    border: 1px solid rgba(100, 116, 139, 0.18);
+    border-radius: 12px;
+
+    background: rgba(100, 116, 139, 0.025);
+
+    transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(37, 99, 235, 0.38);
+
+    box-shadow:
+        0 12px 30px rgba(15, 23, 42, 0.07);
+}
+
+.stat-number {
+    display: block;
+
+    font-size: clamp(2.25rem, 4vw, 2.9rem);
+    line-height: 1;
+
+    font-weight: 800;
+    letter-spacing: -0.055em;
+
+    transition: color 0.25s ease;
+}
+
+.stat-label {
+    display: block;
+
+    margin-top: 10px;
+
+    font-size: 0.72rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    opacity: 0.52;
+
+    transition:
+        color 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.stat-card:hover .stat-number {
+    color: #2563eb;
+}
+
+.stat-card:hover .stat-label {
+    opacity: 0.75;
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.home-section {
+    padding: 72px 0;
+    position: relative;
+}
+
+.services-section::before,
+.projects-section::before,
+.process-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(1180px, calc(100% - 40px));
+    height: 1px;
+    transform: translateX(-50%);
+    background: rgba(100, 116, 139, 0.14);
+}
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+.home-section {
+    padding: 110px 0;
+}
+
+.section-heading {
+    max-width: 720px;
+    margin-bottom: 55px;
+}
+
+.section-label {
+    display: block;
+    margin-bottom: 14px;
+    color: #2563eb;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.045em;
+}
+
+.section-heading p {
+    max-width: 650px;
+    margin: 20px 0 0;
+    line-height: 1.8;
+    opacity: 0.65;
+}
+
+/* =========================
+   SERVICES — REFINED UI
+========================= */
+
+.services-section {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Section heading */
+.services-section .section-heading {
+    max-width: 720px;
+    margin-bottom: 42px;
+}
+
+.services-section .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 12px;
+
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+
+    color: #2563eb;
+}
+
+.services-section .section-label::before {
+    content: "";
+
+    width: 24px;
+    height: 1px;
+
+    background: #2563eb;
+}
+
+.services-section .section-heading h2 {
+    margin: 0 0 12px;
+
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.05;
+
+    font-weight: 800;
+    letter-spacing: -0.055em;
+}
+
+.services-section .section-heading p {
+    max-width: 620px;
+
+    margin: 0;
+
+    font-size: 0.94rem;
+    line-height: 1.75;
+
+    opacity: 0.58;
+}
+
+
+/* =========================
+   SERVICE GRID
+========================= */
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+
+/* =========================
+   SERVICE CARD
+========================= */
+
+.service-card {
+    position: relative;
+
+    min-height: 225px;
+    padding: 30px 28px;
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgba(100, 116, 139, 0.17);
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(100, 116, 139, 0.045),
+            rgba(100, 116, 139, 0.012)
+        );
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+/* subtle blue corner */
+.service-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 120px;
+    height: 120px;
+
+    top: -75px;
+    right: -65px;
+
+    border-radius: 50%;
+
+    background: rgba(37, 99, 235, 0.08);
+
+    filter: blur(20px);
+
+    transition: transform 0.4s ease;
+}
+
+
+/* top accent */
+.service-card::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 28px;
+
+    width: 34px;
+    height: 2px;
+
+    background: #2563eb;
+
+    transition: width 0.3s ease;
+}
+
+
+/* Hover */
+.service-card:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(37, 99, 235, 0.32);
+
+    box-shadow:
+        0 16px 38px rgba(15, 23, 42, 0.08);
+}
+
+.service-card:hover::before {
+    transform: scale(1.45);
+}
+
+.service-card:hover::after {
+    width: 65px;
+}
+
+
+/* =========================
+   EXISTING CARD CONTENT
+========================= */
+
+.service-card h3 {
+    position: relative;
+    z-index: 1;
+
+    margin: 0 0 11px;
+
+    font-size: 1.22rem;
+    line-height: 1.3;
+
+    font-weight: 720;
+    letter-spacing: -0.025em;
+}
+
+.service-card p {
+    position: relative;
+    z-index: 1;
+
+    margin: 0;
+
+    max-width: 390px;
+
+    font-size: 0.88rem;
+    line-height: 1.72;
+
+    opacity: 0.58;
+
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover p {
+    opacity: 0.76;
+}
+
+
+/* =========================
+   EXISTING SHORT CODE
+   AI / DA / SD
+========================= */
+
+.service-card .service-code {
+    position: relative;
+    z-index: 2;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 24px;
+
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    border-radius: 10px;
+
+    color: #2563eb;
+
+    background: rgba(37, 99, 235, 0.055);
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.service-card:hover .service-code {
+    color: #ffffff;
+    background: #2563eb;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+
+/* =========================
+   FEATURED PROJECTS
+   PREMIUM CASE-STUDY UI
+========================= */
+
+.project-category-block {
+    margin-bottom: 70px;
+}
+
+.project-category-block:last-of-type {
+    margin-bottom: 45px;
+}
+
+
+/* =========================
+   CATEGORY HEADING
+========================= */
+
+.project-category-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+    margin-bottom: 30px;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid rgba(100, 116, 139, 0.16);
+}
+
+.project-category-heading > div {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.category-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    border-radius: 50%;
+
+    color: #2563eb;
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+
+    background: rgba(37, 99, 235, 0.04);
+}
+
+.project-category-heading h3 {
+    margin: 0;
+
+    font-size: clamp(1.45rem, 2.5vw, 1.8rem);
+    line-height: 1.1;
+
+    font-weight: 750;
+    letter-spacing: -0.035em;
+}
+
+.category-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: inherit;
+    text-decoration: none;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    opacity: 0.48;
+
+    transition:
+        opacity 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.category-link:hover {
+    color: #2563eb;
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.project-card {
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(100, 116, 139, 0.17);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(100, 116, 139, 0.035),
+            rgba(100, 116, 139, 0.01)
+        );
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(37, 99, 235, 0.32);
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.09);
+}
+
+
+/* =========================
+   PROJECT IMAGE
+========================= */
+
+.project-image {
+    position: relative;
+
+    width: 100%;
+    height: 205px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef3fa,
+            #e7edf7
+        );
+}
+
+.project-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(15, 23, 42, 0.08)
+        );
+
+    pointer-events: none;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.55s cubic-bezier(.2,.7,.2,1),
+        filter 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
+
+    filter: saturate(1.04);
+}
+
+.project-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #64748b;
+
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   PROJECT CONTENT
+========================= */
+
+.project-card-content {
+    position: relative;
+
+    padding: 24px 24px 25px;
+}
+
+
+/* =========================
+   PROJECT META
+========================= */
+
+.project-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    opacity: 0.42;
+}
+
+.featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #2563eb;
+
+    opacity: 1;
+}
+
+.featured-badge::before {
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+}
+
+
+/* =========================
+   PROJECT TITLE
+========================= */
+
+.project-card-content h4 {
+    margin: 0;
+
+    font-size: 1.2rem;
+    line-height: 1.3;
+
+    font-weight: 750;
+    letter-spacing: -0.03em;
+
+    transition: color 0.25s ease;
+}
+
+.project-card:hover .project-card-content h4 {
+    color: #2563eb;
+}
+
+
+/* =========================
+   PROJECT DESCRIPTION
+========================= */
+
+.project-card-content p {
+    margin: 11px 0 18px;
+
+    font-size: 0.86rem;
+    line-height: 1.7;
+
+    opacity: 0.57;
+}
+
+
+/* =========================
+   TECHNOLOGIES
+========================= */
+
+.project-tech {
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(100, 116, 139, 0.13);
+
+    font-size: 0.73rem;
+    line-height: 1.6;
+
+    opacity: 0.48;
+}
+
+
+/* =========================
+   PROJECT LINKS
+========================= */
+
+.project-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: inherit;
+    text-decoration: none;
+
+    font-size: 0.76rem;
+    font-weight: 700;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.project-links a::after {
+    content: "↗";
+
+    font-size: 0.8rem;
+
+    opacity: 0.45;
+
+    transition: transform 0.25s ease;
+}
+
+.project-links a:hover {
+    color: #2563eb;
+
+    transform: translateX(2px);
+}
+
+.project-links a:hover::after {
+    transform: translate(2px, -2px);
+
+    opacity: 1;
+}
+
+
+/* =========================
+   ALL PROJECTS ACTION
+========================= */
+
+.all-projects-action {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 28px;
+}
+
+
+
+/* =========================
+   FEATURED PROJECTS
+   PREMIUM CASE-STUDY UI
+========================= */
+
+.project-category-block {
+    margin-bottom: 70px;
+}
+
+.project-category-block:last-of-type {
+    margin-bottom: 45px;
+}
+
+
+/* =========================
+   CATEGORY HEADING
+========================= */
+
+.project-category-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 24px;
+    margin-bottom: 30px;
+
+    padding-bottom: 16px;
+
+    border-bottom: 1px solid rgba(100, 116, 139, 0.16);
+}
+
+.project-category-heading > div {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.category-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(37, 99, 235, 0.22);
+    border-radius: 50%;
+
+    color: #2563eb;
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+
+    background: rgba(37, 99, 235, 0.04);
+}
+
+.project-category-heading h3 {
+    margin: 0;
+
+    font-size: clamp(1.45rem, 2.5vw, 1.8rem);
+    line-height: 1.1;
+
+    font-weight: 750;
+    letter-spacing: -0.035em;
+}
+
+.category-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    color: inherit;
+    text-decoration: none;
+
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+
+    opacity: 0.48;
+
+    transition:
+        opacity 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.category-link:hover {
+    color: #2563eb;
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+
+/* =========================
+   PROJECT GRID
+========================= */
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+
+/* =========================
+   PROJECT CARD
+========================= */
+
+.project-card {
+    position: relative;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(100, 116, 139, 0.17);
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(100, 116, 139, 0.035),
+            rgba(100, 116, 139, 0.01)
+        );
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(37, 99, 235, 0.32);
+
+    box-shadow:
+        0 20px 50px rgba(15, 23, 42, 0.09);
+}
+
+
+/* =========================
+   PROJECT IMAGE
+========================= */
+
+.project-image {
+    position: relative;
+
+    width: 100%;
+    height: 205px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef3fa,
+            #e7edf7
+        );
+}
+
+.project-image::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            transparent 55%,
+            rgba(15, 23, 42, 0.08)
+        );
+
+    pointer-events: none;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.55s cubic-bezier(.2,.7,.2,1),
+        filter 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
+
+    filter: saturate(1.04);
+}
+
+.project-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #64748b;
+
+    font-size: 0.7rem;
+    font-weight: 750;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+
+/* =========================
+   PROJECT CONTENT
+========================= */
+
+.project-card-content {
+    position: relative;
+
+    padding: 24px 24px 25px;
+}
+
+
+/* =========================
+   PROJECT META
+========================= */
+
+.project-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 13px;
+
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+
+    opacity: 0.42;
+}
+
+.featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #2563eb;
+
+    opacity: 1;
+}
+
+.featured-badge::before {
+    content: "";
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+}
+
+
+/* =========================
+   PROJECT TITLE
+========================= */
+
+.project-card-content h4 {
+    margin: 0;
+
+    font-size: 1.2rem;
+    line-height: 1.3;
+
+    font-weight: 750;
+    letter-spacing: -0.03em;
+
+    transition: color 0.25s ease;
+}
+
+.project-card:hover .project-card-content h4 {
+    color: #2563eb;
+}
+
+
+/* =========================
+   PROJECT DESCRIPTION
+========================= */
+
+.project-card-content p {
+    margin: 11px 0 18px;
+
+    font-size: 0.86rem;
+    line-height: 1.7;
+
+    opacity: 0.57;
+}
+
+
+/* =========================
+   TECHNOLOGIES
+========================= */
+
+.project-tech {
+    padding-top: 14px;
+
+    border-top: 1px solid rgba(100, 116, 139, 0.13);
+
+    font-size: 0.73rem;
+    line-height: 1.6;
+
+    opacity: 0.48;
+}
+
+
+/* =========================
+   PROJECT LINKS
+========================= */
+
+.project-links {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    gap: 14px;
+
+    margin-top: 18px;
+}
+
+.project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: inherit;
+    text-decoration: none;
+
+    font-size: 0.76rem;
+    font-weight: 700;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.project-links a::after {
+    content: "↗";
+
+    font-size: 0.8rem;
+
+    opacity: 0.45;
+
+    transition: transform 0.25s ease;
+}
+
+.project-links a:hover {
+    color: #2563eb;
+
+    transform: translateX(2px);
+}
+
+.project-links a:hover::after {
+    transform: translate(2px, -2px);
+
+    opacity: 1;
+}
+
+
+/* =========================
+   ALL PROJECTS ACTION
+========================= */
+
+.all-projects-action {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 28px;
+}
+
+
+
+/* =========================
+   MY PROCESS
+   SDLC STYLE DIAGRAM
+========================= */
+
+.process-section {
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.process-header {
+    max-width: 760px;
+    margin-bottom: 58px;
+}
+
+.process-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 14px;
+
+    color: #2563eb;
+
+    font-size: 0.68rem;
+    font-weight: 750;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.process-eyebrow span {
+    width: 26px;
+    height: 1px;
+
+    background: #2563eb;
+}
+
+.process-header h2 {
+    margin: 0 0 15px;
+
+    font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+    line-height: 1;
+
+    font-weight: 800;
+    letter-spacing: -0.06em;
+}
+
+.process-header p {
+    max-width: 690px;
+
+    margin: 0;
+
+    font-size: 0.95rem;
+    line-height: 1.8;
+
+    opacity: 0.56;
+}
+
+
+/* =========================
+   PROCESS DIAGRAM
+========================= */
+
+.process-diagram {
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+
+    padding: 10px 0 5px;
+}
+
+
+/* =========================
+   PROCESS STEP
+========================= */
+
+.process-step {
+    position: relative;
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0 16px;
+}
+
+
+/* =========================
+   NUMBER
+========================= */
+
+.process-number {
+    margin-bottom: 12px;
+
+    color: #2563eb;
+
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.process-icon {
+    position: relative;
+
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    border: 1px solid rgba(37, 99, 235, 0.16);
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(37, 99, 235, 0.08),
+            rgba(37, 99, 235, 0.025)
+        );
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.process-icon-symbol {
+    color: #2563eb;
+
+    font-size: 1.55rem;
+    font-weight: 500;
+}
+
+.process-step:hover .process-icon {
+    transform: translateY(-4px);
+
+    border-color: rgba(37, 99, 235, 0.35);
+
+    box-shadow:
+        0 10px 28px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================
+   STEP CONTENT
+========================= */
+
+.process-step-content h3 {
+    margin: 0 0 9px;
+
+    font-size: 1.2rem;
+    line-height: 1.25;
+
+    font-weight: 750;
+    letter-spacing: -0.03em;
+
+    transition: color 0.25s ease;
+}
+
+.process-step:hover .process-step-content h3 {
+    color: #2563eb;
+}
+
+.process-line {
+    width: 30px;
+    height: 2px;
+
+    margin-bottom: 13px;
+
+    background: #2563eb;
+
+    transition: width 0.3s ease;
+}
+
+.process-step:hover .process-line {
+    width: 52px;
+}
+
+.process-step-content p {
+    max-width: 190px;
+
+    margin: 0;
+
+    font-size: 0.8rem;
+    line-height: 1.65;
+
+    opacity: 0.54;
+}
+
+
+/* =========================
+   CONNECTOR
+========================= */
+
+.process-connector {
+    position: absolute;
+
+    top: 50px;
+    right: -7px;
+
+    width: 34px;
+
+    display: flex;
+    align-items: center;
+
+    color: #94a3b8;
+}
+
+.process-connector span {
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(100, 116, 139, 0.25);
+}
+
+.process-connector b {
+    margin-left: 5px;
+
+    font-size: 0.9rem;
+    font-weight: 400;
+
+    opacity: 0.65;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta-section {
+    padding: 100px 0 120px;
+}
+
+.cta-card {
+    position: relative;
+    overflow: hidden;
+    padding: 75px 50px;
+    text-align: center;
+    border-radius: 18px;
+    background: #0f172a;
+    color: #ffffff;
+}
+
+.cta-card::before {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: -160px;
+    right: -100px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.25);
+    filter: blur(20px);
+}
+
+.cta-label {
+    position: relative;
+    display: block;
+    margin-bottom: 15px;
+    color: #60a5fa;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.cta-card h2 {
+    position: relative;
+    margin: 0 auto;
+    max-width: 800px;
+    font-size: clamp(2.3rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+}
+
+.cta-card p {
+    position: relative;
+    max-width: 620px;
+    margin: 22px auto 30px;
+    line-height: 1.7;
+    opacity: 0.7;
+}
+
+.cta-card .btn {
+    position: relative;
+}
+
+
+/* =========================
+   REVEAL ANIMATION
+========================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   HOME PAGE — FINAL RESPONSIVE SYSTEM
+   ========================================================= */
+
+/* ---------- Large Tablets / Small Laptops ---------- */
+@media (max-width: 1100px) {
+
+    .container {
+        width: min(100% - 40px, 1000px);
+    }
+
+    .hero-grid {
+        grid-template-columns: minmax(0, 1fr) minmax(340px, 0.85fr);
+        gap: 45px;
+    }
+
+    .hero-name {
+        font-size: clamp(3rem, 6vw, 5rem);
+    }
+
+    .hero-introduction {
+        max-width: 580px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid,
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-step {
+        padding: 0 10px;
+    }
+
+    .process-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .process-step-content p {
+        max-width: 160px;
+    }
+
+    .process-connector {
+        width: 25px;
+    }
+}
+
+
+/* ---------- Tablets ---------- */
+@media (max-width: 900px) {
+
+    .container {
+        width: calc(100% - 40px);
+        max-width: 760px;
+    }
+
+    /* HERO */
+    .hero-section {
+        min-height: auto;
+        padding: 70px 0 90px;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+    }
+
+    .hero-content {
+        max-width: 760px;
+    }
+
+    .hero-visual {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero-actions {
+        flex-wrap: wrap;
+    }
+
+    /* STATS */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* SERVICES */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* PROCESS */
+    .process-diagram {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        row-gap: 55px;
+    }
+
+    .process-connector {
+        display: none;
+    }
+
+    .process-step {
+        padding: 0 10px;
+    }
+
+    .process-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .process-step-content p {
+        max-width: 220px;
+    }
+
+    /* CTA */
+    .cta-section {
+        padding: 80px 0 100px;
+    }
+}
+
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+
+    .container {
+        width: calc(100% - 30px);
+        max-width: none;
+    }
+
+    /* HERO */
+    .hero-section {
+        padding: 55px 0 75px;
+    }
+
+    .hero-grid {
+        gap: 35px;
+    }
+
+    .hero-name {
+        font-size: clamp(2.8rem, 13vw, 4.3rem);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+    }
+
+    .hero-title {
+        margin-top: 20px;
+        font-size: 1.2rem;
+    }
+
+    .hero-introduction {
+        font-size: 0.96rem;
+        line-height: 1.7;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .hero-actions .btn {
+        width: 100%;
+    }
+
+    /* PROFILE PICTURE
+       Keep the existing profile-picture design.
+       These rules only make it fit mobile screens. */
+    .hero-profile {
+        width: 330px;
+        height: 440px;
+        transform: scale(0.90);
+        transform-origin: center;
+    }
+
+    .hero-profile-image {
+        width: 285px;
+        height: 380px;
+    }
+
+    .hero-profile-layer {
+        width: 285px;
+        height: 380px;
+    }
+
+    .hero-profile-accent {
+        left: 5px;
+        top: 145px;
+    }
+
+    .hero-profile-dots {
+        right: -2px;
+        top: 230px;
+    }
+
+    .hero-profile-message {
+        display: none;
+    }
+
+    /* STATS */
+    .stats-section {
+        padding-bottom: 65px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-card {
+        min-height: 125px;
+        padding: 24px 20px;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+    }
+
+    /* GENERAL SECTIONS */
+    .home-section {
+        padding: 75px 0;
+    }
+
+    .section-heading {
+        margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(2rem, 9vw, 2.8rem);
+    }
+
+    .section-heading p {
+        font-size: 0.92rem;
+        line-height: 1.7;
+    }
+
+    /* SERVICES */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .service-card {
+        min-height: auto;
+        padding: 26px 24px;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .project-category-block {
+        margin-bottom: 50px;
+    }
+
+    .project-category-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .project-image {
+        height: 210px;
+    }
+
+    .project-card-content {
+        padding: 22px;
+    }
+
+    .project-card-content p {
+        font-size: 0.87rem;
+    }
+
+    .project-links {
+        gap: 12px;
+    }
+
+    /* PROCESS */
+    .process-header {
+        margin-bottom: 40px;
+    }
+
+    .process-header h2 {
+        font-size: clamp(2.2rem, 10vw, 3.2rem);
+    }
+
+    .process-diagram {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .process-step {
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        column-gap: 16px;
+        padding: 22px 0;
+        border-bottom: 1px solid rgba(100, 116, 139, 0.12);
+    }
+
+    .process-step:last-child {
+        border-bottom: none;
+    }
+
+    .process-number {
+        grid-row: span 2;
+        align-self: start;
+        margin-top: 5px;
+    }
+
+    .process-icon {
+        grid-column: 2;
+        width: 52px;
+        height: 52px;
+        margin-bottom: 15px;
+    }
+
+    .process-icon-symbol {
+        font-size: 1.25rem;
+    }
+
+    .process-step-content {
+        grid-column: 2;
+    }
+
+    .process-step-content h3 {
+        font-size: 1.08rem;
+    }
+
+    .process-step-content p {
+        max-width: 100%;
+        font-size: 0.84rem;
+    }
+
+    /* CTA */
+    .cta-section {
+        padding: 65px 0 80px;
+    }
+
+    .cta-card {
+        padding: 55px 25px;
+        border-radius: 15px;
+    }
+
+    .cta-card h2 {
+        font-size: clamp(2.2rem, 10vw, 3rem);
+    }
+
+    .cta-card p {
+        font-size: 0.92rem;
+    }
+}
+
+
+/* ---------- Small Mobile ---------- */
+@media (max-width: 500px) {
+
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    /* HERO */
+    .hero-name {
+        font-size: clamp(2.5rem, 14vw, 3.7rem);
+    }
+
+    .hero-title {
+        font-size: 1.05rem;
+    }
+
+    .hero-introduction {
+        font-size: 0.92rem;
+    }
+
+    /* PROFILE PICTURE */
+    .hero-profile {
+        transform: scale(0.82);
+        transform-origin: center;
+        margin: -30px 0;
+    }
+
+    /* STATS */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        min-height: 115px;
+        border-right: none;
+        border-bottom: 1px solid rgba(100, 116, 139, 0.16);
+    }
+
+    .stat-card:last-child {
+        border-bottom: none;
+    }
+
+    /* SERVICES */
+    .service-card {
+        padding: 24px 22px;
+    }
+
+    /* PROJECTS */
+    .project-image {
+        height: 195px;
+    }
+
+    .project-card-content {
+        padding: 20px;
+    }
+
+    .project-card-content h4 {
+        font-size: 1.12rem;
+    }
+
+    /* CTA */
+    .cta-card {
+        padding: 48px 20px;
+    }
+}
+
+
+/* ---------- Very Small Phones ---------- */
+@media (max-width: 380px) {
+
+    .container {
+        width: calc(100% - 24px);
+    }
+
+    .hero-name {
+        font-size: 2.45rem;
+    }
+
+    .hero-title {
+        font-size: 1rem;
+    }
+
+    .hero-introduction {
+        font-size: 0.89rem;
+    }
+
+    /* PROFILE PICTURE */
+    .hero-profile {
+        transform: scale(0.72);
+        margin: -55px 0;
+    }
+
+    .hero-actions .btn {
+        min-height: 46px;
+        padding: 0 18px;
+    }
+
+    .stat-card {
+        padding: 22px 18px;
+    }
+
+    .service-card {
+        padding: 22px 18px;
+    }
+
+    .project-card-content {
+        padding: 20px 18px;
+    }
+
+    .cta-card {
+        padding: 42px 18px;
+    }
+}
+
+
+/* ---------- Extremely Small Screens ---------- */
+@media (max-width: 340px) {
+
+    .hero-name {
+        font-size: 2.25rem;
+    }
+
+    .hero-title {
+        font-size: 0.94rem;
+    }
+
+    .hero-introduction {
+        font-size: 0.86rem;
+    }
+
+    .section-heading h2 {
+        font-size: 2rem;
+    }
+
+    .process-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .project-image {
+        height: 180px;
+    }
+}
+
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .btn,
+    .service-card,
+    .project-card,
+    .project-image img,
+    .process-icon,
+    .hero-profile-image,
+    .hero-profile-image img {
+        transition: none;
+    }
+}
+
+
+
+
+</style>
+
+
+<!-- =========================
+     REVEAL SCRIPT
+========================== -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+        revealElements.forEach(function (element) {
+            element.classList.add("revealed");
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+        function (entries, observer) {
+
+            entries.forEach(function (entry) {
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("revealed");
+                    observer.unobserve(entry.target);
+
+                }
+
+            });
+
+        },
+        {
+            threshold: 0.12
+        }
+    );
+
+    revealElements.forEach(function (element) {
+        observer.observe(element);
+    });
+
+});
+</script>
+
+{% endblock %}
