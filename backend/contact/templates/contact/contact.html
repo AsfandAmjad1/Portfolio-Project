@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+f{% extends "base.html" %}
 
 {% block title %}
 Contact | Asfand Amjad
@@ -593,8 +593,10 @@ Contact | Asfand Amjad
             <form
                 class="contact-form"
                 method="POST"
-                action="https://formsubmit.co/asfand.amjad1@gmail.com"
+                action="{% url 'contact:contact' %}"
             >
+		{% csrf_token %}
+		
 
             <input
     type="hidden"
